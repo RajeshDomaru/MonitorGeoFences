@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Monitor Geo Fences</string>
+    <string name="title_activity_maps">Maps Activity</string>
+
+<!--    <string name="api_key">AIzaSyDc0jV_UYDdNQFAMeHmf_cCsKVfTh1CUPw</string>-->
+<!--    <string name="api_key">AIzaSyAFEemZgx0geGi8VTDWjyHIKVHA34ZJLfc</string>-->
+    <string name="span_address">Span Technology services Private limited, International Tech Park, Zenith Building, Acendas, CSIR Rd, Tharamani, Chennai, Tamil Nadu 600113.</string>
+    <string name="geofence_transition_entered">Entered</string>
+    <string name="geofence_transition_exited">Exited</string>
+    <string name="unknown_geofence_transition">Unknown Transition</string>
+
+    <string name="geofence_not_available">Geofence service is not available now</string>
+    <string name="geofence_too_many_geofences">Your app has registered too many geofences</string>
+    <string name="geofence_too_many_pending_intents">You have provided too many PendingIntents to the addGeofences() call</string>
+    <string name="unknown_geofence_error">Unknown error: the Geofence service is not available now</string>
+    <string name="geofence_transition_invalid_type">Geofence transition error: invalid transition type %1$d</string>
+    <string name="start_service">Start Service</string>
+    <string name="service_start_successfully">service start successfully</string>
+    <string name="service_already_running">service already running</string>
+</resources>
