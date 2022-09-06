@@ -1,4 +1,4 @@
-package com.span.monitorgeofences
+package com.span.monitorgeofences.geo_fences.receivers
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Build
 import android.util.Log
 import android.widget.Toast
+import com.span.monitorgeofences.geo_fences.services.GeoFencesService
 
 class ServiceBroadcastReceiver : BroadcastReceiver() {
 
@@ -17,7 +18,7 @@ class ServiceBroadcastReceiver : BroadcastReceiver() {
 
             Toast.makeText(context, "Service restarted", Toast.LENGTH_SHORT).show()
 
-            val intentServices = Intent(context, LocationService::class.java)
+            val intentServices = Intent(context, GeoFencesService::class.java)
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
                 context.startForegroundService(intentServices)

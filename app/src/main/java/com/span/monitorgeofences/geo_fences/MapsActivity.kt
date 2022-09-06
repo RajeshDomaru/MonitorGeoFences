@@ -1,4 +1,4 @@
-package com.span.monitorgeofences
+package com.span.monitorgeofences.geo_fences
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -26,8 +26,11 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.span.monitorgeofences.R
 import com.span.monitorgeofences.databinding.ActivityMapsBinding
-
+import com.span.monitorgeofences.geo_fences.services.GeoFencesService
+import com.span.monitorgeofences.geo_fences.util.GeoFencesHelper
+import com.span.monitorgeofences.live_location.LiveLocationActivity
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -35,9 +38,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var binding: ActivityMapsBinding
 
-    private var mLocationService: LocationService = LocationService()
+    private var geoFencesService: GeoFencesService = GeoFencesService()
 
-    private lateinit var mServiceIntent: Intent
+    private lateinit var geoFencesServiceIntent: Intent
 
     private val geoFencesId = "GEO_FENCES_ID"
 
@@ -53,13 +56,25 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         setContentView(binding.root)
 
-        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.fcMap) as SupportMapFragment
 
         mapFragment.getMapAsync(this)
 
-        mLocationService = LocationService()
+        geoFencesService = GeoFencesService()
 
-        mServiceIntent = Intent(this, mLocationService.javaClass)
+        geoFencesServiceIntent = Intent(this, geoFencesService.javaClass)
+
+        setOnClickListeners()
+
+    }
+
+    private fun setOnClickListeners() {
+
+        binding.btnLiveLocation.setOnClickListener {
+
+            startActivity(Intent(this, LiveLocationActivity::class.java))
+
+        }
 
     }
 

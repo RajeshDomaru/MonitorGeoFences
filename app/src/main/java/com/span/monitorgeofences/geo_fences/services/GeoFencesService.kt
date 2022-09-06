@@ -1,4 +1,4 @@
-package com.span.monitorgeofences
+package com.span.monitorgeofences.geo_fences.services
 
 import android.Manifest
 import android.app.Notification
@@ -19,9 +19,11 @@ import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofencingClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
+import com.span.monitorgeofences.geo_fences.util.GeoFencesHelper
+import com.span.monitorgeofences.geo_fences.receivers.ServiceBroadcastReceiver
 import java.util.*
 
-class LocationService : Service() {
+class GeoFencesService : Service() {
 
     private val geoFencesId = "GEO_FENCES_ID"
 

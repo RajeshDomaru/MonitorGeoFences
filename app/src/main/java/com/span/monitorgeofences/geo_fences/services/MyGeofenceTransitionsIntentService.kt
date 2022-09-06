@@ -1,4 +1,4 @@
-package com.span.monitorgeofences
+package com.span.monitorgeofences.geo_fences.services
 
 import android.app.*
 import android.content.Context
@@ -14,6 +14,8 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.TaskStackBuilder
 import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofencingEvent
+import com.span.monitorgeofences.R
+import com.span.monitorgeofences.geo_fences.MapsActivity
 
 class MyGeofenceTransitionsIntentService : IntentService("GeofencingService") {
 

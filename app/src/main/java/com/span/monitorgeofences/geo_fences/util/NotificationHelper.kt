@@ -1,4 +1,4 @@
-package com.span.monitorgeofences
+package com.span.monitorgeofences.geo_fences.util
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -12,6 +12,9 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.span.monitorgeofences.R
+import com.span.monitorgeofences.geo_fences.CHANNEL_ID
+import com.span.monitorgeofences.geo_fences.CHANNEL_NAME
 import java.util.*
 
 class NotificationHelper(base: Context) : ContextWrapper(base) {

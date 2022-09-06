@@ -1,4 +1,4 @@
-package com.span.monitorgeofences
+package com.span.monitorgeofences.geo_fences.util
 
 import android.app.PendingIntent
 import android.content.Context
@@ -10,6 +10,7 @@ import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofenceStatusCodes
 import com.google.android.gms.location.GeofencingRequest
 import com.google.android.gms.maps.model.LatLng
+import com.span.monitorgeofences.geo_fences.receivers.GeoFencesBroadcastReceiver
 
 class GeoFencesHelper(mContext: Context) : ContextWrapper(mContext) {
 
@@ -18,7 +19,11 @@ class GeoFencesHelper(mContext: Context) : ContextWrapper(mContext) {
     fun getGeoFencingRequest(geofence: Geofence): GeofencingRequest =
         GeofencingRequest.Builder()
             .addGeofence(geofence)
-            .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
+            .setInitialTrigger(
+                GeofencingRequest.INITIAL_TRIGGER_ENTER /*or
+                        GeofencingRequest.INITIAL_TRIGGER_DWELL or
+                        GeofencingRequest.INITIAL_TRIGGER_EXIT*/
+            )
             .build()
 
     fun getGeoFence(id: String, latLng: LatLng, radius: Float, transitionTypes: Int): Geofence =
@@ -26,7 +31,7 @@ class GeoFencesHelper(mContext: Context) : ContextWrapper(mContext) {
             .setRequestId(id)
             .setCircularRegion(latLng.latitude, latLng.longitude, radius)
             .setTransitionTypes(transitionTypes)
-            .setLoiteringDelay(5000)
+            .setLoiteringDelay(1000)
             .setExpirationDuration(Geofence.NEVER_EXPIRE)
             .build()
 

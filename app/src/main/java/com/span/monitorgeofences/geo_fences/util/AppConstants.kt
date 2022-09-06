@@ -1,4 +1,4 @@
-package com.span.monitorgeofences
+package com.span.monitorgeofences.geo_fences
 
 const val FINE_LOCATION_ACCESS_REQUEST_CODE = 10001
 const val BACKGROUND_LOCATION_ACCESS_REQUEST_CODE = 10002

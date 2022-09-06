@@ -24,8 +24,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
 
+        <activity
+            android:name=".live_location.LiveLocationActivity"
+            android:exported="false"
+            android:label="@string/live_location" />
+
         <receiver
-            android:name=".ServiceBroadcastReceiver"
+            android:name=".geo_fences.receivers.ServiceBroadcastReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
@@ -34,16 +39,16 @@
         </receiver>
 
         <receiver
-            android:name=".GeoFencesBroadcastReceiver"
+            android:name=".geo_fences.receivers.GeoFencesBroadcastReceiver"
             android:enabled="true"
             android:exported="false" />
 
         <service
-            android:name=".LocationService"
+            android:name=".geo_fences.services.GeoFencesService"
             android:foregroundServiceType="location" />
 
         <service
-            android:name=".MyGeofenceTransitionsIntentService"
+            android:name=".geo_fences.services.MyGeofenceTransitionsIntentService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="location" />
@@ -53,7 +58,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".geo_fences.MapsActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
             android:exported="true"
             android:label="@string/title_activity_maps"
@@ -64,6 +69,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".live_location.services.LocationService"
+            android:foregroundServiceType="location" />
+
+        <receiver
+            android:name=".live_location.receivers.RestartBackgroundService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="RestartService" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

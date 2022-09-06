@@ -1,4 +1,4 @@
-package com.span.monitorgeofences
+package com.span.monitorgeofences.geo_fences.receivers
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -7,12 +7,14 @@ import android.util.Log
 import android.widget.Toast
 import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofencingEvent
+import com.span.monitorgeofences.geo_fences.MapsActivity
+import com.span.monitorgeofences.geo_fences.util.NotificationHelper
 
 class GeoFencesBroadcastReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
 
-        Log.e("GeoFencesBroadcastReceiver", "Done...")
+        Log.e("GeoFencesReceiver", "Done...")
 
         //        GeofenceTransitionsJobIntentService.enqueueWork(context, intent)
 
@@ -27,7 +29,7 @@ class GeoFencesBroadcastReceiver : BroadcastReceiver() {
                 if (geofencingEvent.hasError()) {
 
                     Log.e(
-                        "GeoFencesBroadcastReceiver",
+                        "GeoFencesReceiver",
                         "onReceive : Error receiving geoFence event..."
                     )
 
