@@ -2,12 +2,16 @@ package com.span.monitorgeofences
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.PictureInPictureParams
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.graphics.Point
 import android.os.Build
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.util.Log
+import android.view.Display
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -193,9 +197,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         addCircle(latLng)
 
-//        addGeoFence(latLng)
+        addGeoFence(latLng)
 
-        if (Util.isMyServiceRunning(mLocationService.javaClass, this)) {
+        /*if (Util.isMyServiceRunning(mLocationService.javaClass, this)) {
 
             Log.e("setMonitorGeoFences", getString(R.string.service_already_running))
 
@@ -215,7 +219,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 Toast.LENGTH_SHORT
             ).show()
 
-        }
+        }*/
 
     }
 
@@ -248,7 +252,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 .addOnCompleteListener { task ->
 
                     if (task.isSuccessful) {
-                        Toast.makeText(this, "Geofencing Successful", Toast.LENGTH_SHORT).show()
+                        Log.e("Geofencing Success: ", "Geofencing Successful")
+//                        Toast.makeText(this, "Geofencing Successful", Toast.LENGTH_SHORT).show()
                     } else {
                         val errorMessage =
                             task.exception?.let { geoFencesHelper.getErrorString(it) }
@@ -331,23 +336,23 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     }
 
-    /*override fun onPause() {
+    override fun onPause() {
 
         super.onPause()
 
-        *//*val outMetrics = DisplayMetrics()
+        val outMetrics = DisplayMetrics()
 
-       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             display?.getRealMetrics(outMetrics)
         } else {
             windowManager.defaultDisplay.getMetrics(outMetrics)
-        }*//*
+        }
 
-       *//* val d: Display = windowManager.defaultDisplay
+        val d: Display = windowManager.defaultDisplay
         val p = Point()
         d.getSize(p)
         val width: Int = p.x
-        val height: Int = p.y*//*
+        val height: Int = p.y
 
 //        val ratio = Rational(width, height)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -356,6 +361,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             enterPictureInPictureMode(pipBuilder.build())
         }
 
-    }*/
+    }
 
 }

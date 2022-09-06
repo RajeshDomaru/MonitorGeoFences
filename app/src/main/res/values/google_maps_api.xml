@@ -20,5 +20,6 @@
     Once you have your key (it starts with "AIza"), replace the "google_maps_key"
     string in this file.
     -->
-    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDc0jV_UYDdNQFAMeHmf_cCsKVfTh1CUPw</string>
+<!--    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDc0jV_UYDdNQFAMeHmf_cCsKVfTh1CUPw</string>-->
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyAFEemZgx0geGi8VTDWjyHIKVHA34ZJLfc</string> <!-- myPayWow live API key -->
 </resources>

@@ -4,6 +4,9 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import android.widget.Toast
+import com.google.android.gms.location.Geofence
+import com.google.android.gms.location.GeofencingEvent
 
 class GeoFencesBroadcastReceiver : BroadcastReceiver() {
 
@@ -13,65 +16,75 @@ class GeoFencesBroadcastReceiver : BroadcastReceiver() {
 
         //        GeofenceTransitionsJobIntentService.enqueueWork(context, intent)
 
-        /*val notificationHelper = NotificationHelper(context)
+        if (context != null && intent != null) {
 
-        val geofencingEvent = GeofencingEvent.fromIntent(intent)
+            val notificationHelper = NotificationHelper(context)
 
-        if (geofencingEvent != null) {
+            val geofencingEvent = GeofencingEvent.fromIntent(intent)
 
-            if (geofencingEvent.hasError()) {
+            if (geofencingEvent != null) {
 
-                Log.e("GeoFencesBroadcastReceiver, "onReceive: Error receiving geoFence event...")
+                if (geofencingEvent.hasError()) {
 
-                return
+                    Log.e(
+                        "GeoFencesBroadcastReceiver",
+                        "onReceive : Error receiving geoFence event..."
+                    )
+
+                    return
+
+                }
+
+                when (geofencingEvent.geofenceTransition) {
+
+                    Geofence.GEOFENCE_TRANSITION_ENTER -> {
+
+                        Log.e("GeofencingEvent", "GEOFENCE_TRANSITION_ENTER")
+
+                        Toast.makeText(context, "GEOFENCE_TRANSITION_ENTER", Toast.LENGTH_SHORT)
+                            .show()
+
+                        notificationHelper.sendHighPriorityNotification(
+                            "GEOFENCE_TRANSITION_ENTER", "",
+                            MapsActivity::class.java
+                        )
+
+                    }
+
+                    Geofence.GEOFENCE_TRANSITION_DWELL -> {
+
+                        Toast.makeText(context, "GEOFENCE_TRANSITION_DWELL", Toast.LENGTH_SHORT)
+                            .show()
+
+                        Log.e("GeofencingEvent", "GEOFENCE_TRANSITION_DWELL")
+
+                        notificationHelper.sendHighPriorityNotification(
+                            "GEOFENCE_TRANSITION_DWELL", "",
+                            MapsActivity::class.java
+                        )
+
+                    }
+
+                    Geofence.GEOFENCE_TRANSITION_EXIT -> {
+
+                        Toast.makeText(context, "GEOFENCE_TRANSITION_EXIT", Toast.LENGTH_SHORT)
+                            .show()
+
+                        Log.e("GeofencingEvent", "GEOFENCE_TRANSITION_EXIT")
+
+                        notificationHelper.sendHighPriorityNotification(
+                            "GEOFENCE_TRANSITION_EXIT",
+                            "",
+                            MapsActivity::class.java
+                        )
+
+                    }
+
+                }
 
             }
 
-            when (geofencingEvent.geofenceTransition) {
-
-                Geofence.GEOFENCE_TRANSITION_ENTER -> {
-
-                    Log.e("GeofencingEvent", "GEOFENCE_TRANSITION_ENTER")
-
-                    Toast.makeText(context, "GEOFENCE_TRANSITION_ENTER", Toast.LENGTH_SHORT).show()
-
-                    notificationHelper.sendHighPriorityNotification(
-                        "GEOFENCE_TRANSITION_ENTER", "",
-                        MapsActivity::class.java
-                    )
-
-                }
-
-                Geofence.GEOFENCE_TRANSITION_DWELL -> {
-
-                    Toast.makeText(context, "GEOFENCE_TRANSITION_DWELL", Toast.LENGTH_SHORT).show()
-
-                    Log.e("GeofencingEvent", "GEOFENCE_TRANSITION_DWELL")
-
-                    notificationHelper.sendHighPriorityNotification(
-                        "GEOFENCE_TRANSITION_DWELL", "",
-                        MapsActivity::class.java
-                    )
-
-                }
-
-                Geofence.GEOFENCE_TRANSITION_EXIT -> {
-
-                    Toast.makeText(context, "GEOFENCE_TRANSITION_EXIT", Toast.LENGTH_SHORT).show()
-
-                    Log.e("GeofencingEvent", "GEOFENCE_TRANSITION_EXIT")
-
-                    notificationHelper.sendHighPriorityNotification(
-                        "GEOFENCE_TRANSITION_EXIT",
-                        "",
-                        MapsActivity::class.java
-                    )
-
-                }
-
-            }
-
-        }*/
+        }
 
     }
 
