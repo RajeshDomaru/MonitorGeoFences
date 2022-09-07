@@ -26,6 +26,10 @@ class LocationService : Service() {
 
     private lateinit var context: Context
 
+    private val notificationChannelId = "com.get_background_live_location"
+
+    private val channelName = "Background Live Location"
+
     override fun onCreate() {
 
         super.onCreate()
@@ -48,10 +52,9 @@ class LocationService : Service() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createNotificationChanel() {
-        val NOTIFICATION_CHANNEL_ID = "com.getlocationbackground"
-        val channelName = "Background Service"
+
         val notificationChannel = NotificationChannel(
-            NOTIFICATION_CHANNEL_ID,
+            notificationChannelId,
             channelName,
             NotificationManager.IMPORTANCE_NONE
         ).apply {
@@ -60,15 +63,20 @@ class LocationService : Service() {
         }
 
         val manager = (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager)
+
         manager.createNotificationChannel(notificationChannel)
+
         val notificationBuilder =
-            NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
+            NotificationCompat.Builder(this, notificationChannelId)
+
         val notification: Notification = notificationBuilder.setOngoing(true)
             .setContentTitle("App is running count::$counter")
             .setPriority(NotificationManager.IMPORTANCE_MIN)
             .setCategory(Notification.CATEGORY_SERVICE)
             .build()
+
         startForeground(2, notification)
+
     }
 
     override fun onDestroy() {
@@ -144,7 +152,9 @@ class LocationService : Service() {
 
                         Log.d("Location ", liveLocation)
 
-                        val liveIntent = Intent("LiveLocationUpdates").apply { putExtra("liveLocation", liveLocation) }
+                        val liveIntent = Intent("LiveLocationUpdates").apply {
+                            putExtra("liveLocation", liveLocation)
+                        }
 
                         LocalBroadcastManager.getInstance(context).sendBroadcast(liveIntent)
 
