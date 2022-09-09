@@ -255,39 +255,35 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         val geofencingRequest = geoFencesHelper.getGeoFencingRequest(geofence)
 
-        val pendingIntent = geoFencesHelper.getGeoFencesPendingIntent()
+        val pendingIntent = geoFencesHelper.getGeoFencesPendingIntent
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
             != PackageManager.PERMISSION_GRANTED
         ) return
 
-        if (pendingIntent != null) {
+        geofencingClient.addGeofences(geofencingRequest, pendingIntent)
+            .addOnCompleteListener { task ->
 
-            geofencingClient.addGeofences(geofencingRequest, pendingIntent)
-                .addOnCompleteListener { task ->
-
-                    if (task.isSuccessful) {
-                        Log.e("Geofencing Success: ", "Geofencing Successful")
+                if (task.isSuccessful) {
+                    Log.e("Geofencing Success: ", "Geofencing Successful")
 //                        Toast.makeText(this, "Geofencing Successful", Toast.LENGTH_SHORT).show()
-                    } else {
-                        val errorMessage =
-                            task.exception?.let { geoFencesHelper.getErrorString(it) }
-                        Log.e("Geofencing Failed: ", errorMessage!!)
-                    }
-
+                } else {
+                    val errorMessage =
+                        task.exception?.let { geoFencesHelper.getErrorString(it) }
+                    Log.e("Geofencing Failed: ", errorMessage!!)
                 }
 
-            /*.addOnSuccessListener {
+            }
 
-                Log.e("addOnSuccessListener ", "Success...")
+        /*.addOnSuccessListener {
 
-            }.addOnFailureListener {
+            Log.e("addOnSuccessListener ", "Success...")
 
-                Log.e("addOnFailureListener ", geoFencesHelper.getErrorString(it))
+        }.addOnFailureListener {
 
-            }*/
+            Log.e("addOnFailureListener ", geoFencesHelper.getErrorString(it))
 
-        }
+        }*/
 
     }
 

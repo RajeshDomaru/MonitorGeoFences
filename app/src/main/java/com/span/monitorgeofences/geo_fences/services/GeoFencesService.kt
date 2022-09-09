@@ -19,8 +19,8 @@ import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofencingClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
-import com.span.monitorgeofences.geo_fences.util.GeoFencesHelper
 import com.span.monitorgeofences.geo_fences.receivers.ServiceBroadcastReceiver
+import com.span.monitorgeofences.geo_fences.util.GeoFencesHelper
 import java.util.*
 
 class GeoFencesService : Service() {
@@ -72,28 +72,24 @@ class GeoFencesService : Service() {
 
         val geofencingRequest = geoFencesHelper.getGeoFencingRequest(geofence)
 
-        val pendingIntent = geoFencesHelper.getGeoFencesPendingIntent()
+        val pendingIntent = geoFencesHelper.getGeoFencesPendingIntent
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
             != PackageManager.PERMISSION_GRANTED
         ) return
 
-        if (pendingIntent != null) {
+        geofencingClient.addGeofences(geofencingRequest, pendingIntent)
+            .addOnCompleteListener { task ->
 
-            geofencingClient.addGeofences(geofencingRequest, pendingIntent)
-                .addOnCompleteListener { task ->
-
-                    if (task.isSuccessful) {
-                        Log.e("addOnCompleteListener", "Geofencing Successful")
-                    } else {
-                        val errorMessage =
-                            task.exception?.let { geoFencesHelper.getErrorString(it) }
-                        Log.e("Geofencing Failed: ", errorMessage!!)
-                    }
-
+                if (task.isSuccessful) {
+                    Log.e("addOnCompleteListener", "Geofencing Successful")
+                } else {
+                    val errorMessage =
+                        task.exception?.let { geoFencesHelper.getErrorString(it) }
+                    Log.e("Geofencing Failed: ", errorMessage!!)
                 }
 
-        }
+            }
 
     }
 

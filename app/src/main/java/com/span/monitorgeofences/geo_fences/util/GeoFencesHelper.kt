@@ -35,9 +35,7 @@ class GeoFencesHelper(mContext: Context) : ContextWrapper(mContext) {
             .setExpirationDuration(Geofence.NEVER_EXPIRE)
             .build()
 
-    fun getGeoFencesPendingIntent(): PendingIntent? {
-
-        pendingIntent?.let { return it }
+    val getGeoFencesPendingIntent: PendingIntent by lazy {
 
         val intent = Intent(this, GeoFencesBroadcastReceiver::class.java)
 
@@ -46,10 +44,8 @@ class GeoFencesHelper(mContext: Context) : ContextWrapper(mContext) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
             flag = PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
 
-        pendingIntent = PendingIntent.getBroadcast(this, 998, intent, flag)
-
-        return pendingIntent
-
+        PendingIntent.getBroadcast(this, 998, intent, flag)
+        
     }
 
     fun getErrorString(e: Exception): String {
